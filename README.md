@@ -18,6 +18,7 @@ Clone the project, then
 
     npm install
     bower install
+    #you may have to select a jQuery version: 2.1 looks perfect
 
     #if grunt was not installed with -g
     alias grunt=./node_modules/grunt-cli/bin/grunt

@@ -199,7 +199,7 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
     var timeoutCloseDetails;
     var divDetails =$('#vep-extras'); 
 
-    pviz.FeatureDisplayer.addMouseoverCallback(['vep_feature'], function(ft, el) {
+    pviz.FeatureDisplayer.addMouseoverCallback(['vep_feature'], function(ft) {
         if (timeoutCloseDetails !== undefined) {
             clearTimeout(timeoutCloseDetails);
         }
@@ -218,7 +218,7 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
             })));
         });
     });
-    pviz.FeatureDisplayer.addMouseoutCallback(['vep_feature'], function(ft, el) {
+    pviz.FeatureDisplayer.addMouseoutCallback(['vep_feature'], function() {
         timeoutCloseDetails = setTimeout(function() {
             divDetails.hide();
         }, 3000)

@@ -3,9 +3,8 @@ define([], function() {
     'use strict';
     var VEP = {};
     VEP.Output = function() {
-        var _this = this;
 
-        return _this;
+        return this;
     };
 
     VEP.Output.prototype.load = function(content, success) {
@@ -56,6 +55,15 @@ define([], function() {
         return Object.keys(_this.indexName).sort();
     };
 
+    var splitExtraBlock = function(val) {
+        var xt = {};
+        val.split(';').forEach(function(token) {
+            var tktmp = token.split('=', 2);
+            xt[tktmp[0]] = tktmp[1];
+        });
+        return xt;
+    };
+
     VEP.Output.prototype.getByName = function(name) {
         var _this = this;
         var block = _this.indexName[name];
@@ -64,16 +72,8 @@ define([], function() {
             return;
         }
 
-        var splitExtraBlock = function(val) {
-            var xt = {};
-            val.split(';').forEach(function(token) {
-                var tktmp = token.split('=', 2);
-                xt[tktmp[0]] = tktmp[1];
-            });
-            return xt;
-        };
 
-        var features = block.split('\n').map(function(line) {
+        return block.split('\n').map(function(line) {
             var tmp = line.split('\t');
             var n = tmp.length;
             var feature = {};
@@ -105,7 +105,6 @@ define([], function() {
             return feature;
         });
 
-        return features;
     };
 
     return VEP;

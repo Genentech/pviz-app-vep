@@ -281,7 +281,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('test', ['clean:server', 'coffee', 'createDefaultTemplate', 'jst', 'compass', 'connect:test', 'mocha', 'watch:test']);
 
-    grunt.registerTask('build', ['clean:dist', 'coffee', 'createDefaultTemplate', 'jst', 'compass:dist', 'useminPrepare', 'requirejs', 'imagemin', 'htmlmin', 'concat', 'cssmin', 'uglify', 'copy', 'rev', 'usemin']);
+    grunt.registerTask('dist', ['clean:dist', 'coffee', 'createDefaultTemplate', 'jst', 'compass:dist', 'useminPrepare', 'requirejs', 'imagemin', 'htmlmin', 'concat', 'cssmin', 'uglify', 'copy', 'rev', 'usemin']);
 
     grunt.registerTask('default', ['jshint', 'test', 'build']);
 };

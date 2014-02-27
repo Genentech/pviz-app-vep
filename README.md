@@ -9,6 +9,8 @@ Any features with protein position are displayed. By default, only the protein w
 
 The field in the 'Extras' column are displayed when mousing over a feature.
 
+The application can be used live at [http://research-pub.gene.com/pviz/app/vep](http://research-pub.gene.com/pviz/app/vep)
+
 ##Usage
 Enter a gene name to display the related protein.
 

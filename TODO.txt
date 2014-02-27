@@ -1,0 +1,38 @@
+TODO
+- deploy on google app engine
+- add a retry  for ensembl rest url 
+- populate google analytics with more info
+
+DOING
+
+DONE
+- I like the type-ahead, but I would like a notification that a gene I put in has not been found (right now, it just does not respond). 
+- auto close details div on mouse out + 3 seconds
+- The textual textual annotation at the left hand side (ie. 'non_synonymous_codon') sometimes overlaps with the actual mutation block (see, RAD18). Maybe there is a better way to provide those annotations, perhaps as colored blocks at the left hand side with a legend explaining them?
+- find a way it's obvious we can click and zoom
+- position handler whould be on the lower axis bar
+- add a grey line in lieu of sequence if font is too small.
+- "Select Legend" was confusing, maybe "Color By" is better? Probably should have one selected by default?
+- The position axis should probably be on the bottom. Right now, the axis sort of divides up the plot, and its position seems arbitrary.
+- find a way to make the text on the upper marker to be smalll - big - small
+- change enlighting box color + grid / use tooltip 
+- output header with a '+' or whatever expand icon
+- when using test case, put TP53 as default and lauch it
+- remove test.vep
+- submit a decent sized test case, available for public use
+- add a real color palette instead of 5 fixed values
+- cleanup help file
+- add google analytics
+- gruntified
+- add alert if FileReader API is not available in browser
+- add a config box, stored in cookies: urlEnsemblREST API at first
+- facet entries by SIFT, PolyPhen, DOMAINS, MOTIF_NAME, HIGH_INF_POS, CELL_TYPE, SV (removing parentheses when present)
+- enlight variant feature when mousing over facets
+- add a favicon
+- autocomplete on HGNC
+- report error for failed to retrieve ENSP
+- allow multiple ENSPs to be displayed for one HGNC
+- recover entries by HGNC instead of ENSPs
+- help page (with Genetench mention)
+- file loader for local stored files
+- better extras fields display

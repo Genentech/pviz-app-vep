@@ -1,0 +1,174 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>pViz.js/VEP viewer</title>
+        <link rel="icon" href="favicon.ico">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="bower_components/pviz/src/css/pviz-core.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+
+        <style id="style-vep">
+            span.vep_feature, g.feature.vep_feature rect {
+                background-color: #bbb;
+                fill: #bbb;
+            }
+            span.vep_feature.extra-name-PolyPhen.extra-value-benign, g.feature.vep_feature.extra-name-PolyPhen.extra-value-benign rect {
+                background-color: #BEFF23;
+                fill: #BEFF23;
+            }
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" >pViz.js/VEP viewer</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a><span id="loading" class="glyphicon glyphicon-upload" style="display:none"></span></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>Select an example </strong><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class='load-test' set='test'>test</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" style="padding-top:7px">
+                        <strong style="color: #777"> or load your .vep file</strong>
+                        <div class="form-group">
+                            <input type='file' id="vep-file"/>
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a style="cursor:pointer" data-toggle="modal" data-target="#modal-configure"> Configure </a>
+                        </li>
+                        <li>
+                            <a style="cursor:pointer" data-toggle="modal" data-target="#modal-help"> Help </a>
+                        </li>
+                        <li>
+                            <a href="http://github.com/genentech/pviz">github</a>
+                        </li>
+
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+        <div class="container">
+            <div id='welcome' class="jumbotron">
+                <h1>Welcome to pViz/VEP viewer</h1>
+                <p>
+                    This application offers the graphical display of Ensembl Variant Effect Predictor output, on a per protein basis. It is aimed to be a demo for <a href="http://github.com/genentech/pviz">pViz.js (a dynamic JavaScript & SVG library for visualization of protein sequence features)</a>.
+                </p>
+                <p>
+                    Upload your own .vep output file in the header bar or select on of our test cases as a starter, enter an ENSP protein Id and browse the results. Zoom in the sequence by dragging the mouse and zoom out with a double click.
+                </p>
+                <p>
+                    Feel free to download or fork the code on <a href="http://github.com/genentech/pviz-app-vep">github</a> or build your own application on application based on <a href="http://github.com/genentech/pviz">pViz.js</a>.
+                </p>
+                <p>
+                    To work, this application needs a modern browser such as recent chrome, safari, or firefox.
+                </p>
+
+            </div>
+        </div>
+        <div id="main" class="container" style='display: none'>
+            <h3 id="set-name" class='output'></h3>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title"><a class='accordion-switch collapsed' data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Output header <span class="glyphicon"></span></a></h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div id="vep-comment" class="panel-body output"></div>
+                    </div>
+                </div>
+            </div>
+            <p/>
+            <div class='row'>
+                <div class=" col-sm-2">
+                    <h4>Show variations for</h4>
+                </div>
+                <div class="form-inline col-sm-10">
+                    <div class="form-group">
+                        <input type='text' class="form-control input-lg tt-query" id="ac-typeahead" placeholder="gene name">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" id="ac-show">
+                            show
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <h4>Color by</h4>
+                </div>
+                <div class="col-sm-10 output entry" id="div-facets" ></div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-8 pull-right" style="text-align: right"><em>Drag to zoom in, double-click to zoom out and mouse over variants to have details</em></div>
+            </div>
+            
+            <div id='pviz-list' class='output entry' ></div>
+
+            <div class='row' id="details-footer">
+                <div class="col-sm-6 pull-right output entry" id="vep-extras"></div>
+            </div>
+        </div>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] ||
+                function() {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-46645179-1', 'gene.com');
+            ga('send', 'pageview');
+
+        </script>
+
+        <!-- build:js scripts/main.js -->
+        <script data-main="scripts/main" src="bower_components/requirejs/require.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<div class="modal fade" id="modal-configure" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h2 class="modal-title" >Configure</h2>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Setup your configuration. It will be saved into cookies in your browser. Any change made will be saved directly.
+                </p>
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label">ensembl REST url</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="input form-control configure-param" name="url_ensembl_rest" placeholder="http://beta.rest.ensembl.org/sequence/id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-3 control-label">faceted fields</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="input form-control configure-param" name="faceted_fields" placeholder="SIFT,PolyPhen,DOMAINS,MOTIF_NAME,HIGH_INF_POS,CELL_TYPE,SV">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

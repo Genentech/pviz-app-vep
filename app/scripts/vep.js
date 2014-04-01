@@ -1,13 +1,13 @@
-define([], function() {
+define([], function () {
     //
     'use strict';
     var VEP = {};
-    VEP.Output = function() {
+    VEP.Output = function () {
 
         return this;
     };
 
-    VEP.Output.prototype.load = function(content, success) {
+    VEP.Output.prototype.load = function (content, success) {
         var _this = this;
         _this.comments = '';
         _this.indexName = {};
@@ -15,9 +15,9 @@ define([], function() {
 
         var reComment = /^##\s*(.*)/;
         var reHeader = /^#(.*)/;
-        var reNames = /\bHGNC=(.+?)(;|$)/;
+        var reNames = /\b(?:HGNC|SYMBOL)=(.+?)(;|$)/;
 
-        content.split('\n').forEach(function(line) {
+        content.split('\n').forEach(function (line) {
             var m = reComment.exec(line);
             if (m) {
                 _this.comments += m[1] + '\n';
@@ -50,21 +50,39 @@ define([], function() {
         success(_this);
     };
 
-    VEP.Output.prototype.listNames = function() {
+    /**
+     *
+     * @return {Array} list all the available HGNC/SYMBOL names
+     */
+    VEP.Output.prototype.listNames = function () {
         var _this = this;
         return Object.keys(_this.indexName).sort();
     };
 
-    var splitExtraBlock = function(val) {
+    /**
+     *
+     * @return {*} a representative example of the loaded vep
+     */
+    VEP.Output.prototype.exampleName = function () {
+        var _this = this;
+        return _.chain(_this.indexName)
+            .keys()
+            .max(function (name) {
+                return _this.indexName[name].length;
+            })
+            .value();
+    };
+
+    var splitExtraBlock = function (val) {
         var xt = {};
-        val.split(';').forEach(function(token) {
+        val.split(';').forEach(function (token) {
             var tktmp = token.split('=', 2);
             xt[tktmp[0]] = tktmp[1];
         });
         return xt;
     };
 
-    VEP.Output.prototype.getByName = function(name) {
+    VEP.Output.prototype.getByName = function (name) {
         var _this = this;
         var block = _this.indexName[name];
         if (!block) {
@@ -73,7 +91,7 @@ define([], function() {
         }
 
 
-        return block.split('\n').map(function(line) {
+        return block.split('\n').map(function (line) {
             var tmp = line.split('\t');
             var n = tmp.length;
             var feature = {};
@@ -86,14 +104,14 @@ define([], function() {
                     } else if (val.indexOf('-') > 0) {
                         var ptmp = val.split('-');
                         feature[col] = {
-                            start : parseInt(ptmp[0], 10),
-                            end : parseInt(ptmp[1], 10)
+                            start: parseInt(ptmp[0], 10),
+                            end: parseInt(ptmp[1], 10)
                         };
                     } else {
                         var p = parseInt(val, 10);
                         feature[col] = {
-                            start : p,
-                            end : p
+                            start: p,
+                            end: p
                         };
                     }
                 } else if (col === 'Extra') {

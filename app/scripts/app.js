@@ -93,9 +93,13 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
         });
         loadingStop();
 
-        if (options && options.exampleGene) {
-            showOneGene(vep, options.exampleGene);
-        }
+        var gname= vep.exampleName();
+        showOneGene(vep, gname);
+        $('#ac-typeahead').val(gname);
+
+//        if (options && options.exampleGene) {
+//            showOneGene(vep, options.exampleGene);
+//        }
     };
     /**
      * setup loading .vep file possibilities
@@ -107,9 +111,7 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
         var setName = $(this).attr('set');
         $.get('data/' + setName + '.vep', function(data) {
             vepSrc.load(data, function(vep) {
-                processLoadedData(setName, vep, {
-                    exampleGene : 'TP53'
-                });
+                processLoadedData(setName, vep);
             });
         });
     });

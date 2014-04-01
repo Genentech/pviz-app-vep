@@ -39,6 +39,8 @@ This application is based on the versatile [pViz.js: a dynamic JavaScript and SV
 written by [Alexandre Masselot](mailto://masselot.alexandre@gene.com) and [Kiran Mukhyala](mailto://mukhyala.kiran@gene.com),
 from the Bioinformatics & Computational Biology Department, at [Genentech Inc.](http://www.gene.com) Research.
 
+Thanks to Will McLaren for the contributions.
+
 ##Reference
 Please provide a reference to this application by citing:
 '''xxx.xx 2014'''

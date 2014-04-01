@@ -82,7 +82,6 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
 
         //initialize the autocomplete widget on the list of protein names
         $('#ac-typeahead').typeahead('destroy');
-        console.log(vep.listNames())
         $('#ac-typeahead').typeahead({
             name : 'ac',
             local : vep.listNames()
@@ -97,6 +96,7 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
         var gname= vep.exampleName();
         showOneGene(vep, gname);
         $('#ac-typeahead').val(gname);
+        $('#div-facets').find('input.facet-selector')[1].click();
 
 //        if (options && options.exampleGene) {
 //            showOneGene(vep, options.exampleGene);

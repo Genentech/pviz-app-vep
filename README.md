@@ -31,7 +31,7 @@ Et Voilà
 
 ###Deploy
 
-    grunt dist
+    grunt build
     rsync --recursive --delete dist/* your.host:/your/path/
 
 ##Authors

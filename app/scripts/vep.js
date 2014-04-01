@@ -15,7 +15,7 @@ define([], function() {
 
         var reComment = /^##\s*(.*)/;
         var reHeader = /^#(.*)/;
-        var reNames = /\bHGNC=(.+?)(;|$)/;
+        var reNames = /\b(?:HGNC|SYMBOL)=(.+?)(;|$)/;
 
         content.split('\n').forEach(function(line) {
             var m = reComment.exec(line);

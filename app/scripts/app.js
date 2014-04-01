@@ -82,6 +82,7 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
 
         //initialize the autocomplete widget on the list of protein names
         $('#ac-typeahead').typeahead('destroy');
+        console.log(vep.listNames())
         $('#ac-typeahead').typeahead({
             name : 'ac',
             local : vep.listNames()
@@ -152,7 +153,9 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
     //dd callback on mousing over vep_feature type
     pviz.FeatureDisplayer.setCustomHandler('vep_feature', {
         appender : function(viewport, svgGroup, features, type) {
-            var sel = svgGroup.selectAll('rect' + type).data(features).enter().append('g').attr('class', function(ft) {
+            var sel = svgGroup.selectAll('rect' + type).data(features).enter()
+                .append('g')
+                .attr('class', function(ft) {
                 var c = 'feature data ' + type;
                 _.each(ft.extra, function(val, key) {
                     c += ' extra-name-' + key.toLowerCase() + ' ' + 'extra-value-' + val.replace(/\s*\(.*/, '').toLowerCase();
@@ -167,7 +170,7 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
         },
         positioner : function(viewport, d3selection) {
             d3selection.attr('transform', function(ft) {
-                return 'translate(' + viewport.scales.x(ft.start - 0.4) + ',' + viewport.scales.y(ft.displayTrack - 1) + ')';
+                return 'translate(' + viewport.scales.x(ft.start - 0.4) + ',' + viewport.scales.y(ft.displayTrack) + ')';
             });
             var ftWidth = function(ft) {
                 return Math.max(3, viewport.scales.x(ft.end + 0.9) - viewport.scales.x(ft.start + 0.1));

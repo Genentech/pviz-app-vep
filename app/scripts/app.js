@@ -12,7 +12,7 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
      */
     $('body').append($(JST['app/scripts/templates/configure.ejs']()));
     var configDefault = {
-        url_ensembl_rest : 'http://beta.rest.ensembl.org',
+        url_ensembl_rest : 'http://rest.ensembl.org',
         faceted_fields : 'SIFT,PolyPhen,PFAM_DOMAIN,MOTIF_NAME,HIGH_INF_POS,CELL_TYPE,SV'
     };
     var configCookieName = function(key) {
@@ -202,7 +202,7 @@ define(['jquery', 'underscore', 'vep', 'pviz', 'templates', 'colorbrewer', 'type
     });
 
     var timeoutCloseDetails;
-    var divDetails =$('#vep-extras'); 
+    var divDetails =$('#vep-extras');
 
     pviz.FeatureDisplayer.addMouseoverCallback(['vep_feature'], function(ft) {
         if (timeoutCloseDetails !== undefined) {

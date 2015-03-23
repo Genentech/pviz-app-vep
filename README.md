@@ -1,7 +1,7 @@
 #pViz.js/VEP viewer: A browser side only application to view Ensemble Variant Effect Predictor output files
 The [Ensembl Variant Effect Predictor](http://ensembl.ebi.com/vep) produces '.vep' files with, among others, protein positioned features of variant.
 
-We propose a tool to parse such an output, retrieve the protein sequence from [Ensembl REST API](http://beta.rest.ensembl.org), and align the features on the sequence, grouped by categories.
+We propose a tool to parse such an output, retrieve the protein sequence from [Ensembl REST API](http://rest.ensembl.org), and align the features on the sequence, grouped by categories.
 ##Data sources
 Any '.vep' file can be fitted in the tool, either on of the test set or a loaded local files. Files with up to 1.5M lines can be parsed in a chrome browser in approximatively 10 seconds.
 ###Parsed features
